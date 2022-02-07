@@ -54,9 +54,10 @@ class _WhereToGoState extends State<WhereToGo> {
                   elevation: 5,
                   margin: EdgeInsets.all(10),
                 ),
-                ...subtitles.map((product) {
-                  return Text(product.description);
-                }).toList(),
+                Text('$index')
+                // ...subtitles.map((product) {
+                //   return Text(product.description);
+                // }).toList(),
               ],
             ),
           );
