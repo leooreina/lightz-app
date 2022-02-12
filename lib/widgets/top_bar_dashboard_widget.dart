@@ -6,14 +6,13 @@ class TopBarDashboard extends StatelessWidget {
   const TopBarDashboard({Key? key}) : super(key: key);
 
   final double containersWidth = 230;
-  final double containersHeight = 50;
+  final double containersHeight = 20;
   final double iconSize = 40;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      margin: EdgeInsets.only(bottom: 10, left: 25, right: 30),
+      margin: EdgeInsets.only(bottom: 15, left: 25, right: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -28,6 +27,7 @@ class TopBarDashboard extends StatelessWidget {
               ),
               Container(
                   alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.symmetric(vertical: 10),
                   width: containersWidth,
                   height: containersHeight,
                   child: Text('Rua Fulano de Tal, 121',
