@@ -67,7 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
       body: ListView(
         children: [
           TopBarDashboard(),
-          Header(title: data[0].title),
+          Header(title: data[0].title, topMargin: 0),
           CardList(list: subtitlesList, fontWeight: FontWeight.w600),
           Container(
               height: 100,
@@ -78,7 +78,7 @@ class _DashboardPageState extends State<DashboardPage> {
           Container(
             color: HexColor('#474747'),
             height: 0.3,
-            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           ),
           HeaderSeeMore(title: data[2].title),
           CardList(list: hightlightsList, fontWeight: FontWeight.w400,)

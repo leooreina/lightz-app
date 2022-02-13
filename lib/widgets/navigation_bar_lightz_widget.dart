@@ -19,9 +19,20 @@ class _NavigationBarLightzState extends State<NavigationBarLightz> {
       animation: NavigationController.instance,
       builder: (context, child) {
         return Container(
-          height: 105,
+          height: 85,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 10,
+                blurRadius: 12,
+                offset: const Offset(0, 3)
+              ),
+            ],
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
