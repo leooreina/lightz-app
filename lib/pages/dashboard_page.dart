@@ -5,6 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lightz/interfaces/description_list.dart';
 import 'package:lightz/interfaces/header_see_more_props.dart';
 import 'package:lightz/widgets/big_card_list_widget.dart';
+import 'package:lightz/widgets/divider_widget.dart';
 import 'package:lightz/widgets/header_see_more_widget.dart';
 import 'package:lightz/widgets/header_widget.dart';
 import 'package:lightz/widgets/navigation_bar_lightz_widget.dart';
@@ -75,11 +76,7 @@ class _DashboardPageState extends State<DashboardPage> {
               color: HexColor("#C432A8")),
           HeaderSeeMore(title: data[1].title),
           BigCardList(highlights: hightlightsList),
-          Container(
-            color: HexColor('#474747'),
-            height: 0.3,
-            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          ),
+          DividerSlash(),
           HeaderSeeMore(title: data[2].title),
           CardList(list: hightlightsList, fontWeight: FontWeight.w400,)
         ],

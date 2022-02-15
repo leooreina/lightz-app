@@ -13,7 +13,7 @@ class HeaderBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      margin: const EdgeInsets.only(left: 15, right: 15),
+      margin: const EdgeInsets.only(left: 5, right: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -29,7 +29,7 @@ class HeaderBackButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: (width / 3.4)),
+                padding: EdgeInsets.only(left: (width / 3.2)),
                 child: Text(
                   title,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

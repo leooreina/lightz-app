@@ -10,7 +10,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(left: 15, bottom: 10, top: this.topMargin),
+        margin: EdgeInsets.only(left: 20, bottom: 10, top: this.topMargin),
         child: Text(this.title,
             style: TextStyle(
                 color: HexColor('#474747'),

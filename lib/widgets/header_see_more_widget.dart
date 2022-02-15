@@ -14,7 +14,7 @@ class _HeaderSeeMoreState extends State<HeaderSeeMore> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 15, bottom: 10, right: 15),
+      margin: EdgeInsets.only(left: 20, bottom: 10, right: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
