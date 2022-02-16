@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lightz/interfaces/description_list.dart';
+import 'package:lightz/widgets/shimmer_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CardList extends StatefulWidget {
   final List<DescriptionList> list;
@@ -15,14 +17,24 @@ class CardList extends StatefulWidget {
 }
 
 class _CardListState extends State<CardList> {
-  final double margins = 25.0;
-  final double containersWidth = 270;
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2)).then((value) {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 130,
-      child: ListView.builder(
+      child: isLoading ? 
+      ShimmerWidget(count: widget.list.length, widthCard: 85, heightCard: 85)
+      : ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: widget.list.length,
         padding: const EdgeInsets.only(left: 10),
