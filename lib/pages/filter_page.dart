@@ -1,10 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lightz/interfaces/checkbox_model.dart';
 import 'package:lightz/widgets/checkbox_widget.dart';
 import 'package:lightz/widgets/divider_widget.dart';
+import 'package:lightz/widgets/filled_button_widget.dart';
 import 'package:lightz/widgets/header_back_button_widget.dart';
 import 'package:lightz/widgets/header_widget.dart';
+
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key}) : super(key: key);
@@ -15,6 +20,8 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   bool isChecked = false;
+  double _searchRadius = 2;
+  double _searchValue = 50;
 
   List<Widget> _createCheckboxes(list) {
     return List<Widget>.generate(list.length, (index) {
@@ -45,13 +52,13 @@ class _FilterPageState extends State<FilterPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.only(left: 20),
-                height: 100,
-                width: width / 2,
-                child: Column(
-                  children: _createCheckboxes(["Restaurantes", "Bares"]),
-                )),
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.only(left: 20),
+                  height: 100,
+                  width: width / 2,
+                  child: Column(
+                    children: _createCheckboxes(["Restaurantes", "Bares"]),
+                  )),
               Container(
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.only(left: 15),
@@ -74,7 +81,8 @@ class _FilterPageState extends State<FilterPage> {
                   height: 150,
                   width: width / 2,
                   child: Column(
-                    children: _createCheckboxes(["Área de fumantes", "Acessibilidade", "Aceita Pets"]),
+                    children: _createCheckboxes(
+                        ["Área de fumantes", "Acessibilidade", "Aceita Pets"]),
                   )),
               Container(
                 alignment: Alignment.topLeft,
@@ -88,7 +96,102 @@ class _FilterPageState extends State<FilterPage> {
             ],
           ),
           DividerSlash(),
-          Header(title: 'Raio de busca', topMargin: 20)
+          Header(title: 'Raio de busca', topMargin: 20),
+          SfSliderTheme(
+            data: SfSliderThemeData(
+                activeDividerRadius: 5.0,
+                inactiveDividerRadius: 5.0,
+                inactiveDividerColor: HexColor('#C4C4C4').withOpacity(0.90),
+                activeDividerColor: HexColor('#C432A8'),
+                activeTrackColor: HexColor('#C432A8'),
+                thumbColor: Colors.white,
+                inactiveTrackColor: HexColor('#C4C4C4').withOpacity(0.90),
+                overlayColor: HexColor('#C432A8').withOpacity(0.12),
+                activeLabelStyle: TextStyle(
+                  color: HexColor('#474747'),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+                inactiveLabelStyle: TextStyle(
+                  color: HexColor('#C4C4C4'),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+                activeTrackHeight: 2,
+                inactiveTrackHeight: 2,
+                labelOffset: Offset(5.0, 15.0)),
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 20.0),
+              child: SfSlider(
+                min: 0,
+                max: 9.5,
+                value: _searchRadius,
+                interval: 2,
+                stepSize: 2,
+                showLabels: true,
+                showDividers: true,
+                onChanged: (dynamic value) {
+                  setState(() {
+                    _searchRadius = value;
+                  });
+                },
+                labelFormatterCallback:
+                    (dynamic actualValue, String formattedText) {
+                  switch (actualValue) {
+                    case 2:
+                      return '1-${actualValue.round()} km';
+                    case 4:
+                      return ' 3-${(actualValue + 1).round()} km';
+                    case 6:
+                      return ' 6-${(actualValue + 2).round()} km';
+                    case 8:
+                      return ' 9-${(actualValue + 2).round()} km';
+                    default:
+                      return '';
+                  }
+                },
+              ),
+            ),
+          ),
+          DividerSlash(),
+          Header(title: 'Valor', topMargin: 20),
+          SfSliderTheme(
+            data: SfSliderThemeData(
+                activeTrackColor: HexColor('#C432A8'),
+                thumbColor: Colors.white,
+                inactiveTrackColor: HexColor('#C4C4C4').withOpacity(0.90),
+                overlayColor: HexColor('#C432A8').withOpacity(0.12),
+                inactiveLabelStyle: TextStyle(
+                  color: HexColor('#474747'),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+                activeTrackHeight: 2,
+                inactiveTrackHeight: 2,
+                labelOffset: Offset(0.0, 15.0)),
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 20.0),
+              child: SfSlider(
+                min: 0,
+                max: 500,
+                value: _searchValue,
+                interval: 1,
+                showLabels: true,
+                onChanged: (dynamic value) {
+                  setState(() {
+                    _searchValue = value;
+                  });
+                },
+                labelFormatterCallback:
+                    (dynamic actualValue, String formattedText) {
+                  return actualValue == _searchValue.round()
+                      ? 'R\$ $formattedText'
+                      : '';
+                },
+              ),
+            ),
+          ),
+          FilledButton()
         ],
       ),
     );
