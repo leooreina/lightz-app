@@ -7,7 +7,6 @@ import 'package:lightz/interfaces/checkbox_model.dart';
 import 'package:lightz/widgets/checkbox_widget.dart';
 import 'package:lightz/widgets/divider_widget.dart';
 import 'package:lightz/widgets/filled_button_widget.dart';
-import 'package:lightz/widgets/header_back_button_widget.dart';
 import 'package:lightz/widgets/header_widget.dart';
 
 import 'package:syncfusion_flutter_core/theme.dart';

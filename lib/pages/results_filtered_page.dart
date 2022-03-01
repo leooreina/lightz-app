@@ -3,7 +3,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lightz/interfaces/description_list.dart';
 import 'package:lightz/widgets/card_list_widget.dart';
 import 'package:lightz/widgets/divider_widget.dart';
-import 'package:lightz/widgets/header_back_button_widget.dart';
 import 'package:lightz/widgets/header_widget.dart';
 
 class ResultsFilteredPage extends StatefulWidget {
