@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lightz/interfaces/description_list.dart';
 import 'package:lightz/interfaces/header_see_more_props.dart';
@@ -65,6 +66,18 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        child: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            // Status bar brightness (optional)
+            statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+        ),
+        preferredSize: Size.fromHeight(5)
+      ),
       body: ListView(
         children: [
           TopBarDashboard(),
@@ -78,7 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
           BigCardList(highlights: hightlightsList),
           DividerSlash(),
           HeaderSeeMore(title: data[2].title),
-          CardList(list: hightlightsList, fontWeight: FontWeight.w400,)
+          CardList(list: hightlightsList, fontWeight: FontWeight.w400)
         ],
       ),
       bottomNavigationBar: NavigationBarLightz(),
