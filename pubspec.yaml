@@ -37,6 +37,8 @@ dependencies:
   hexcolor: ^2.0.5
   shimmer: ^2.0.0
   syncfusion_flutter_sliders: ^19.4.53
+  http: ^0.13.4
+
 
 dev_dependencies:
   flutter_test:

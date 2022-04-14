@@ -43,7 +43,7 @@ class _BigCardListState extends State<BigCardList> {
                   semanticContainer: true,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Image.network(
-                    widget.highlights[index].url,
+                    widget.highlights[index].image,
                     height: 104,
                     width: 130,
                     fit: BoxFit.fill,
@@ -56,7 +56,7 @@ class _BigCardListState extends State<BigCardList> {
                 ),
                 Container(
                     width: 120,
-                    child: Text(widget.highlights[index].description,
+                    child: Text(widget.highlights[index].title,
                         style: TextStyle(
                           color: HexColor('#474747'),
                           fontSize: 14,
