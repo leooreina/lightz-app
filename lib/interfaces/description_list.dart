@@ -1,6 +1,6 @@
 class DescriptionList {
-  String description;
-  String url;
+  String title;
+  String image;
 
-  DescriptionList({required this.description, required this.url});
+  DescriptionList({required this.title, required this.image});
 }

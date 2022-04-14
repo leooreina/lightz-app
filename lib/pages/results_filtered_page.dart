@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lightz/interfaces/description_list.dart';
+import 'package:lightz/model/category.dart';
+import 'package:lightz/persistance/api_provider.dart';
 import 'package:lightz/widgets/card_list_widget.dart';
 import 'package:lightz/widgets/divider_widget.dart';
 import 'package:lightz/widgets/header_widget.dart';
+
+ApiProvider appApiProvider = ApiProvider();
 
 class ResultsFilteredPage extends StatefulWidget {
   final List categories;
@@ -15,6 +19,14 @@ class ResultsFilteredPage extends StatefulWidget {
 }
 
 class _ResultsFilteredPageState extends State<ResultsFilteredPage> {
+  late Future<List<Category>> futureCategories;
+
+  @override
+  void initState() {
+    super.initState();
+    futureCategories = appApiProvider.fetchCategories();
+  }
+
   _categoriesTextBuilder() {
     var categoriesSize = widget.categories.length;
     switch (categoriesSize) {
@@ -40,20 +52,20 @@ class _ResultsFilteredPageState extends State<ResultsFilteredPage> {
 
   List<DescriptionList> hightlightsList = [
     DescriptionList(
-        description: 'Pilequinhos',
-        url:
+        title: 'Pilequinhos',
+        image:
             'https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'),
     DescriptionList(
-        description: 'Box St. Burger & Bar',
-        url:
+        title: 'Box St. Burger & Bar',
+        image:
             'https://images.unsplash.com/photo-1525268323446-0505b6fe7778?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2500&q=80'),
     DescriptionList(
-        description: 'The Blue Pub',
-        url:
+        title: 'The Blue Pub',
+        image:
             'https://images.unsplash.com/photo-1593887937265-2a09787dcc19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80'),
     DescriptionList(
-        description: 'Pilequinhos',
-        url: 'https://placeimg.com/640/480/any')
+        title: 'Pilequinhos',
+        image: 'https://placeimg.com/640/480/any')
   ];
 
   @override
@@ -90,7 +102,16 @@ class _ResultsFilteredPageState extends State<ResultsFilteredPage> {
         body: ListView(
           children: [
             Header(title: 'Destaques', topMargin: 10),
-            CardList(list: hightlightsList, fontWeight: FontWeight.w400),
+            FutureBuilder<List<Category>>(
+              future: futureCategories,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return CardList(
+                      list: snapshot.data!, fontWeight: FontWeight.w400);
+                }
+                return CardList(list: [], fontWeight: FontWeight.w400);
+              }
+            ),
             DividerSlash(),
             Header(title: '${_categoriesTextBuilder()} por perto', topMargin: 10),
           ]

@@ -2,11 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lightz/interfaces/description_list.dart';
+import 'package:lightz/model/category.dart';
 import 'package:lightz/widgets/shimmer_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CardList extends StatefulWidget {
-  final List<DescriptionList> list;
+  final List<Category> list;
   final FontWeight fontWeight;
 
   const CardList({Key? key, required this.list, required this.fontWeight})
@@ -47,7 +48,7 @@ class _CardListState extends State<CardList> {
                   semanticContainer: true,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Image.network(
-                    widget.list[index].url,
+                    widget.list[index].image,
                     height: 85,
                     width: 85,
                     fit: BoxFit.fill,
@@ -61,7 +62,7 @@ class _CardListState extends State<CardList> {
                 Container(
                   width: 90,
                   alignment: Alignment.center,
-                  child: Text(widget.list[index].description,
+                  child: Text(widget.list[index].title,
                       style: TextStyle(
                         color: HexColor('#474747'),
                         fontSize: 12,
