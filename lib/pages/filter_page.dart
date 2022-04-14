@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lightz/controllers/navigation_controller.dart';
 import 'package:lightz/interfaces/checkbox_model.dart';
 import 'package:lightz/widgets/checkbox_widget.dart';
 import 'package:lightz/widgets/divider_widget.dart';
 import 'package:lightz/widgets/filled_button_widget.dart';
-import 'package:lightz/widgets/header_back_button_widget.dart';
 import 'package:lightz/widgets/header_widget.dart';
 
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -22,6 +23,7 @@ class _FilterPageState extends State<FilterPage> {
   bool isChecked = false;
   double _searchRadius = 2;
   double _searchValue = 50;
+  List categoriesChecked = [];
 
   List<Widget> _createCheckboxes(list) {
     return List<Widget>.generate(list.length, (index) {
@@ -31,6 +33,7 @@ class _FilterPageState extends State<FilterPage> {
         isChecked: isChecked,
         onChange: (value) {
           isChecked = value;
+          isChecked ? categoriesChecked.add(list[index]) : categoriesChecked.removeWhere((element) => element == list[index]);
         },
         backgroundColor: HexColor('#C432A8'),
         borderColor: HexColor('#474747'),
@@ -44,9 +47,42 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        child: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            // Status bar brightness (optional)
+            statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              size: 30,
+              color: HexColor('#474747')
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+              NavigationController.instance
+                  .changePage('initial', HexColor('#C432A8'));
+            }
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: Text(
+            'Filtrar',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: HexColor('#474747')
+            )
+          )
+        ),
+        preferredSize: Size.fromHeight(70)
+      ),
       body: ListView(
         children: [
-          HeaderBackButton(width: width, page: 'initial', title: 'Filtrar'),
           const Header(title: 'O que você procura?', topMargin: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -191,7 +227,7 @@ class _FilterPageState extends State<FilterPage> {
               ),
             ),
           ),
-          FilledButton()
+          FilledButton(categories: categoriesChecked)
         ],
       ),
     );

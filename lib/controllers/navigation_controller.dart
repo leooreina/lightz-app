@@ -10,7 +10,6 @@ class NavigationController extends ChangeNotifier {
   var searchColor;
   var discountColor;
   var profileColor;
-  var filterColor;
 
   void changePage(value, colorValue) {
     page = value;
@@ -19,32 +18,21 @@ class NavigationController extends ChangeNotifier {
       searchColor = null;
       discountColor = null;
       profileColor = null;
-      filterColor = null;
     }
     if (page == 'search') {
       searchColor = colorValue;
       initialColor = null;
       discountColor = null;
       profileColor = null;
-      filterColor = null;
     }
     if (page == 'discount') {
       discountColor = colorValue;
       initialColor = null;
       searchColor = null;
       profileColor = null;
-      filterColor = null;
     }
     if (page == 'profile') {
       profileColor = colorValue;
-      initialColor = null;
-      searchColor = null;
-      discountColor = null;
-      filterColor = null;
-    }
-    if (page == 'filter') {
-      filterColor = colorValue;
-      profileColor = null;
       initialColor = null;
       searchColor = null;
       discountColor = null;

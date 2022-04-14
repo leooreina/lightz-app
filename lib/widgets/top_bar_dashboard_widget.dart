@@ -54,8 +54,6 @@ class TopBarDashboard extends StatelessWidget {
                         builder: (context) => const FilterPage()
                       )
                     );
-                    NavigationController.instance
-                        .changePage('filter', HexColor('#C432A8'));
                   },
                 ),
               ),
